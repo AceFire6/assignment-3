@@ -8,6 +8,14 @@ namespace MLLJET001 {
     private:
         std::shared_ptr<HuffmanNode> left;
         std::shared_ptr<HuffmanNode> right;
+        char character;
+        int charCount;
+
+    public:
+        HuffmanNode(char character, int charCount) : character(character), charCount(charCount) {};
+        bool operator<(const HuffmanNode node) {
+            return (this->charCount < node.charCount);
+        }
     };
 }
 
