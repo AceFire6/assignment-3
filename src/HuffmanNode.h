@@ -13,7 +13,7 @@ namespace MLLJET001 {
 
     public:
         HuffmanNode(char character, int charCount) : character(character), charCount(charCount) {};
-        bool operator<(const HuffmanNode node) {
+        bool operator<(const HuffmanNode node) const {
             return (this->charCount < node.charCount);
         }
     };

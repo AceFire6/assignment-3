@@ -1,9 +1,19 @@
-#include <iostream>
 #include <fstream>
+#include <iostream>
+#include <queue>
 #include <string>
 #include <unordered_map>
 
+#include "HuffmanNode.h"
+
 using namespace std;
+
+class CompareNode {
+public:
+    bool operator()(const MLLJET001::HuffmanNode& a, const MLLJET001::HuffmanNode& b) {
+        return a < b;
+    }
+};
 
 int main(int argc, const char* argv[]) {
     if (argc < 2) {
@@ -20,15 +30,23 @@ int main(int argc, const char* argv[]) {
 
     if (inFile.is_open()) {
         while (getline(inFile, line)) {
-            for (char c: line) {
-                if (charMap.find(c) != charMap.end()) {
-                    charMap.at(c) += 1;
+            for (char character: line) {
+                if (charMap.find(character) != charMap.end()) {
+                    charMap.at(character) += 1;
                 } else {
-                    charMap.insert({c, 1});
+                    charMap.insert({character, 1});
                 }
             }
         }
     }
 
+    priority_queue<MLLJET001::HuffmanNode, vector<MLLJET001::HuffmanNode>, CompareNode> nodeQueue;
+    for (auto pair: charMap) {
+        nodeQueue.push(MLLJET001::HuffmanNode(pair.first, pair.second));
+    }
+
+
+
     return 0;
 }
+
