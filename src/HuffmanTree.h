@@ -3,6 +3,7 @@
 
 #include <memory>
 #include <vector>
+#include <queue>
 #include "HuffmanNode.h"
 
 namespace MLLJET001 {
@@ -12,6 +13,7 @@ namespace MLLJET001 {
         std::vector<HuffmanNode> nodes;
 
     public:
+        HuffmanTree(HuffmanNode root);
         ~HuffmanTree();
 
     };
