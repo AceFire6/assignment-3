@@ -101,7 +101,7 @@ int main(int argc, const char* argv[]) {
     if (outFile.is_open()) {
         outFile << codeTable.size() << endl;
         for (auto pair : codeTable) {
-            outFile << pair.second << '\t' << pair.first << endl;
+            outFile << pair.first << '\t' << pair.second << endl;
         }
     }
 
