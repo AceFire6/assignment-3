@@ -8,7 +8,7 @@ namespace MLLJET001 {
     class HuffmanNode {
     private:
         char character;
-        int charCount;
+        int frequency;
 
     public:
         std::shared_ptr<HuffmanNode> left;
@@ -22,21 +22,25 @@ namespace MLLJET001 {
         ~HuffmanNode() { }
 
         // Parametrized Constructor
-        HuffmanNode(char character, int charCount) : character(character), charCount(charCount) {};
+        HuffmanNode(char character, int charCount) :
+                character(character), frequency(charCount) {};
 
         // Copy Constructor
         HuffmanNode(const HuffmanNode & rhs) :
-                character(rhs.character), charCount(rhs.charCount), left(rhs.left), right(rhs.right) {};
+                character(rhs.character), frequency(rhs.frequency),
+                left(rhs.left), right(rhs.right) {};
 
         // Move Constructor
-        HuffmanNode(HuffmanNode && rhs) : character(rhs.character), charCount(rhs.charCount),
-                                          left(std::move(rhs.left)), right(std::move(rhs.right)) {};
+        HuffmanNode(HuffmanNode && rhs) : character(rhs.character),
+                                          frequency(rhs.frequency),
+                                          left(std::move(rhs.left)),
+                                          right(std::move(rhs.right)) {};
 
         // Copy Assignment
         HuffmanNode & operator=(const HuffmanNode & rhs) {
             if (this != &rhs) {
                 character = rhs.character;
-                charCount = rhs.charCount;
+                frequency = rhs.frequency;
 
                 left = rhs.left;
                 right = rhs.right;
@@ -49,8 +53,8 @@ namespace MLLJET001 {
             if (this != &rhs) {
                 character = rhs.character;
                 rhs.setCharacter('\0');
-                charCount = rhs.charCount;
-                rhs.setCharCount(0);
+                frequency = rhs.frequency;
+                rhs.setFrequency(0);
 
                 left = std::move(rhs.left);
                 right = std::move(rhs.right);
@@ -58,17 +62,23 @@ namespace MLLJET001 {
             return *this;
         }
 
+        // Overload the '<' operator to compare the frequency of the char
         bool operator<(const HuffmanNode node) const {
-            return (this->charCount < node.charCount);
+            return (this->frequency < node.frequency);
         }
 
+        // Return the char held by this object
         char getCharacter() const;
 
+        // Return the frequency the char held by this object appears in the
+        // input
         int getFrequency() const;
 
+        // Set the char held by this object
         void setCharacter(char character);
 
-        void setCharCount(int count);
+        // Set the frequency of the char held by this object
+        void setFrequency(int count);
     };
 }
 

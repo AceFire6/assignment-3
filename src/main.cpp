@@ -11,7 +11,8 @@ using namespace std;
 
 class CompareNode {
 public:
-    bool operator()(const MLLJET001::HuffmanNode& a, const MLLJET001::HuffmanNode& b) {
+    bool operator()(const MLLJET001::HuffmanNode& a,
+                    const MLLJET001::HuffmanNode& b) {
         // If a < b. a comes after b. The largest value gets highest priority.
         return !(a < b);
     }
@@ -48,7 +49,8 @@ int main(int argc, const char* argv[]) {
         return 0;
     }
 
-    priority_queue<MLLJET001::HuffmanNode, vector<MLLJET001::HuffmanNode>, CompareNode> nodeQueue;
+    priority_queue<MLLJET001::HuffmanNode,
+            vector<MLLJET001::HuffmanNode>, CompareNode> nodeQueue;
     for (auto pair: charMap) {
         nodeQueue.push(MLLJET001::HuffmanNode(pair.first, pair.second));
     }
