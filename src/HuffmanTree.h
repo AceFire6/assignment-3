@@ -13,12 +13,12 @@ namespace MLLJET001 {
     private:
         std::shared_ptr<HuffmanNode> rootNode;
         std::vector<HuffmanNode> nodes;
-        std::unordered_map<std::string, char> codeTable;
+        std::unordered_map<char, std::string> codeTable;
 
     public:
         HuffmanTree(HuffmanNode root);
         ~HuffmanTree();
-        std::unordered_map<std::string, char> getCharMap();
+        std::unordered_map<char, std::string> getCharMap();
         void populateMap(std::string bitCode, std::shared_ptr<HuffmanNode> parent);
 
     };

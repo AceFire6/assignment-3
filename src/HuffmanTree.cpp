@@ -13,18 +13,21 @@ namespace MLLJET001 {
         rootNode = nullptr;
     }
 
-    std::unordered_map<std::string, char> HuffmanTree::getCharMap() {
+    std::unordered_map<char, std::string> HuffmanTree::getCharMap() {
         populateMap("", rootNode);
         return codeTable;
     }
 
-    void HuffmanTree::populateMap(std::string bitCode, std::shared_ptr<HuffmanNode> parent) {
+    void HuffmanTree::populateMap(std::string bitCode,
+                                  std::shared_ptr<HuffmanNode> parent) {
         if (parent->left != nullptr) {
             if (parent->left->getCharacter() == '\0') {
                 populateMap(bitCode + "0", parent->left);
             } else {
-                std::cout << parent->getCharacter() << '\t' << bitCode << "0" << std::endl;
-                codeTable.insert({bitCode + "0", parent->left->getCharacter()});
+                std::cout << parent->left->getCharacter() << '\t'
+                          << bitCode << "0" << std::endl;
+                codeTable.insert(
+                        {parent->left->getCharacter(), bitCode + "0"});
             }
         }
 
@@ -32,8 +35,10 @@ namespace MLLJET001 {
             if (parent->right->getCharacter() == '\0') {
                 populateMap(bitCode + "1", parent->right);
             } else {
-                std::cout << parent->getCharacter() << '\t' << bitCode << "1" << std::endl;
-                codeTable.insert({bitCode + "1", parent->right->getCharacter()});
+                std::cout << parent->right->getCharacter() << '\t'
+                          << bitCode << "1" << std::endl;
+                codeTable.insert(
+                        {parent->right->getCharacter(), bitCode + "1"});
             }
         }
     }
