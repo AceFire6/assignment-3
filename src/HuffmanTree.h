@@ -1,9 +1,11 @@
 #ifndef HUFFMANTREE_H
 #define HUFFMANTREE_H
 
+#include <unordered_map>
 #include <memory>
 #include <vector>
 #include <queue>
+#include <string>
 #include "HuffmanNode.h"
 
 namespace MLLJET001 {
@@ -11,10 +13,13 @@ namespace MLLJET001 {
     private:
         std::shared_ptr<HuffmanNode> rootNode;
         std::vector<HuffmanNode> nodes;
+        std::unordered_map<std::string, char> codeTable;
 
     public:
         HuffmanTree(HuffmanNode root);
         ~HuffmanTree();
+        std::unordered_map<std::string, char> getCharMap();
+        void populateMap(std::string bitCode, std::shared_ptr<HuffmanNode> parent);
 
     };
 }
