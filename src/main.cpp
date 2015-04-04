@@ -9,6 +9,7 @@
 
 using namespace std;
 
+// The comparator used by the priority queue
 class CompareNode {
 public:
     bool operator()(const MLLJET001::HuffmanNode& a,
@@ -32,6 +33,7 @@ int main(int argc, const char* argv[]) {
     ifstream inFile(inputFileName);
     string line;
 
+    // Read in and count the frequency of each character
     if (inFile.is_open()) {
         while (getline(inFile, line)) {
             inputStrings.push_back(line);
@@ -49,12 +51,15 @@ int main(int argc, const char* argv[]) {
         return 0;
     }
 
+    // Construct the priority queue from the characters and their frequencies
     priority_queue<MLLJET001::HuffmanNode,
             vector<MLLJET001::HuffmanNode>, CompareNode> nodeQueue;
     for (auto pair: charMap) {
         nodeQueue.push(MLLJET001::HuffmanNode(pair.first, pair.second));
     }
 
+    // Construct the HuffmanTree using the Priority Queue
+    // Loop until just the root node is left in the priority queue.
     while (nodeQueue.size() > 1) {
         MLLJET001::HuffmanNode small1 = nodeQueue.top();
         nodeQueue.pop();
@@ -75,10 +80,14 @@ int main(int argc, const char* argv[]) {
     cout << "Character Count: " << nodeQueue.top().getFrequency() << endl;
     cout << "\nCode Table:\n-----------" << endl;
 
+    // Initialise the HuffmanTree structure with the root node
     MLLJET001::HuffmanTree huffmanTree(nodeQueue.top());
 
+    // Generate and get the bit code table for the characters and their
+    // encoding.
     unordered_map<char, std::string> codeTable = huffmanTree.getCharMap();
 
+    // Write out the "binary" string of the input
     ofstream outFile(outputFileName);
     if (outFile.is_open()) {
         for (auto inputString : inputStrings) {
@@ -90,17 +99,20 @@ int main(int argc, const char* argv[]) {
         outFile.close();
     }
 
+    // Construct the file name for the header file
     size_t index = outputFileName.find('.');
     if (index != string::npos) {
         outputFileName = outputFileName.substr(0, index) + ".hdr";
     }
 
+    // Write out the bit code table
     outFile.open(outputFileName);
     if (outFile.is_open()) {
         outFile << codeTable.size() << endl;
         for (auto pair : codeTable) {
             outFile << pair.first << '\t' << pair.second << endl;
         }
+        outFile.close();
     }
 
     return 0;
