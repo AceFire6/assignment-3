@@ -19,7 +19,7 @@ namespace MLLJET001 {
         HuffmanNode() : character('\0') {};
 
         // Destructor
-//        ~HuffmanNode() { }
+        ~HuffmanNode() { }
 
         // Parametrized Constructor
         HuffmanNode(char character, int charCount) : character(character), charCount(charCount) {};

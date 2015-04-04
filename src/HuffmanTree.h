@@ -12,7 +12,6 @@ namespace MLLJET001 {
     class HuffmanTree {
     private:
         std::shared_ptr<HuffmanNode> rootNode;
-        std::vector<HuffmanNode> nodes;
         std::unordered_map<char, std::string> codeTable;
 
     public:

@@ -50,19 +50,15 @@ int main(int argc, const char* argv[]) {
 
     priority_queue<MLLJET001::HuffmanNode, vector<MLLJET001::HuffmanNode>, CompareNode> nodeQueue;
     for (auto pair: charMap) {
-//        cout << pair.first << '\t' << pair.second << endl;
         nodeQueue.push(MLLJET001::HuffmanNode(pair.first, pair.second));
     }
 
     while (nodeQueue.size() > 1) {
-//        cout << "LOOPING" << '\t' << nodeQueue.size() << endl;
         MLLJET001::HuffmanNode small1 = nodeQueue.top();
         nodeQueue.pop();
-//        cout << small1.getText() << '\t' << small1.getFrequency() << endl;
 
         MLLJET001::HuffmanNode small2 = nodeQueue.top();
         nodeQueue.pop();
-//        cout << small2.getText() << '\t' << small2.getFrequency() << endl;
 
         int totalFrequency = small1.getFrequency() + small2.getFrequency();
 
