@@ -14,7 +14,7 @@ default: $(OBJECTS)
 	$(CC) -c $< -o $@ $(FLAGS)
 
 clean:
-	rm -f $(OBJECTS) build/$(EXE_NAME)
+	rm -f $(OBJECTS) build/$(EXE_NAME) build/*.z build/*.hdr
 
 run:
 	cd ./build && ./$(EXE_NAME) $(ARGS)
