@@ -34,7 +34,7 @@ int main(int argc, const char *argv[]) {
 
     // Generate and get the bit code table for the characters and their
     // encoding.
-    unordered_map<char, std::string> codeTable = huffmanTree.getCharMap();
+    unordered_map<char, std::string> codeTable = huffmanTree.getCodeTable();
 
     // Write out the "binary" string of the input
     ofstream outFile(outputFileName);

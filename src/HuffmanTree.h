@@ -27,7 +27,7 @@ namespace MLLJET001 {
         ~HuffmanTree();
 
         // Returns the newly constructed char -> bit code map
-        std::unordered_map<char, std::string> getCharMap();
+        std::unordered_map<char, std::string> getCodeTable();
 
     };
 }

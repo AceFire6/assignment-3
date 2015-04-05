@@ -13,7 +13,7 @@ namespace MLLJET001 {
         rootNode = nullptr;
     }
 
-    std::unordered_map<char, std::string> HuffmanTree::getCharMap() {
+    std::unordered_map<char, std::string> HuffmanTree::getCodeTable() {
         populateMap("", rootNode);
         return codeTable;
     }
