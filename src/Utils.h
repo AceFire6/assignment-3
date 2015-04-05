@@ -1,6 +1,11 @@
 #ifndef UTILS_H
 #define UTILS_H
 
+#include <vector>
+#include <queue>
+#include <unordered_map>
+
+#include "HuffmanNode.h"
 
 // The comparator used by the priority queue
 class CompareNode {
