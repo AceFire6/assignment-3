@@ -15,15 +15,17 @@ namespace MLLJET001 {
         std::shared_ptr<HuffmanNode> rootNode;
         // The map of the character and its new bit code
         std::unordered_map<char, std::string> codeTable;
+
         // Populates the bit code map
-        void populateMap(std::string bitCode,
-                         std::shared_ptr<HuffmanNode> parent);
+        void populateMap(std::string bitCode, std::shared_ptr<HuffmanNode> parent);
 
     public:
         // Parametrized constructor
         HuffmanTree(HuffmanNode root);
+
         // Destructor
         ~HuffmanTree();
+
         // Returns the newly constructed char -> bit code map
         std::unordered_map<char, std::string> getCharMap();
 

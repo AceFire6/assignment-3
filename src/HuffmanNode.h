@@ -16,28 +16,24 @@ namespace MLLJET001 {
         std::string text;
 
         // Default Constructor
-        HuffmanNode() : character('\0') {};
+        HuffmanNode() : character('\0') { };
 
         // Destructor
         ~HuffmanNode() { }
 
         // Parametrized Constructor
-        HuffmanNode(char character, int charCount) :
-                character(character), frequency(charCount) {};
+        HuffmanNode(char character, int charCount) : character(character), frequency(charCount) { };
 
         // Copy Constructor
-        HuffmanNode(const HuffmanNode & rhs) :
-                character(rhs.character), frequency(rhs.frequency),
-                left(rhs.left), right(rhs.right) {};
+        HuffmanNode(const HuffmanNode &rhs) :
+                character(rhs.character), frequency(rhs.frequency), left(rhs.left), right(rhs.right) { };
 
         // Move Constructor
-        HuffmanNode(HuffmanNode && rhs) : character(rhs.character),
-                                          frequency(rhs.frequency),
-                                          left(std::move(rhs.left)),
-                                          right(std::move(rhs.right)) {};
+        HuffmanNode(HuffmanNode &&rhs) : character(rhs.character), frequency(rhs.frequency), left(std::move(rhs.left)),
+                                         right(std::move(rhs.right)) { };
 
         // Copy Assignment
-        HuffmanNode & operator=(const HuffmanNode & rhs) {
+        HuffmanNode &operator=(const HuffmanNode &rhs) {
             if (this != &rhs) {
                 character = rhs.character;
                 frequency = rhs.frequency;
@@ -49,7 +45,7 @@ namespace MLLJET001 {
         }
 
         // Move Assignment
-        HuffmanNode & operator=(HuffmanNode && rhs) {
+        HuffmanNode &operator=(HuffmanNode &&rhs) {
             if (this != &rhs) {
                 character = rhs.character;
                 rhs.setCharacter('\0');

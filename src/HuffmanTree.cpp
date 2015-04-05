@@ -24,10 +24,8 @@ namespace MLLJET001 {
             if (parent->left->getCharacter() == '\0') {
                 populateMap(bitCode + "0", parent->left);
             } else {
-                std::cout << parent->left->getCharacter() << '\t'
-                          << bitCode << "0" << std::endl;
-                codeTable.insert(
-                        {parent->left->getCharacter(), bitCode + "0"});
+                std::cout << parent->left->getCharacter() << '\t' << bitCode << "0" << std::endl;
+                codeTable.insert({parent->left->getCharacter(), bitCode + "0"});
             }
         }
 
@@ -35,10 +33,8 @@ namespace MLLJET001 {
             if (parent->right->getCharacter() == '\0') {
                 populateMap(bitCode + "1", parent->right);
             } else {
-                std::cout << parent->right->getCharacter() << '\t'
-                          << bitCode << "1" << std::endl;
-                codeTable.insert(
-                        {parent->right->getCharacter(), bitCode + "1"});
+                std::cout << parent->right->getCharacter() << '\t' << bitCode << "1" << std::endl;
+                codeTable.insert({parent->right->getCharacter(), bitCode + "1"});
             }
         }
     }

@@ -1,101 +1,30 @@
 #include <fstream>
 #include <iostream>
 #include <queue>
-#include <string>
 #include <unordered_map>
 
 #include "HuffmanNode.h"
 #include "HuffmanTree.h"
+#include "Utils.h"
 
 using namespace std;
 
-// The comparator used by the priority queue
-class CompareNode {
-public:
-    bool operator()(const MLLJET001::HuffmanNode& a,
-                    const MLLJET001::HuffmanNode& b) {
-        // If a < b. a comes after b. The largest value gets highest priority.
-        return !(a < b);
-    }
-};
 
-
-unordered_map<char, int> generateCharMap(string inputFileName,
-                                         vector<string> * inputStrings) {
-    unordered_map<char, int> charMap;
-    ifstream inFile(inputFileName);
-    string line;
-
-    // Read in and count the frequency of each character
-    if (inFile.is_open()) {
-        while (getline(inFile, line)) {
-            inputStrings->push_back(line);
-            for (char character: line) {
-                if (charMap.find(character) != charMap.end()) {
-                    charMap.at(character) += 1;
-                } else {
-                    charMap.insert({character, 1});
-                }
-            }
-        }
-        inFile.close();
-    } else {
-        cout << "Can't open file." << endl;
-    }
-    return charMap;
-}
-
-priority_queue<MLLJET001::HuffmanNode, vector<MLLJET001::HuffmanNode>, CompareNode> makeNodeQueue(unordered_map<char, int> charMap) {
-    priority_queue<MLLJET001::HuffmanNode,
-            vector<MLLJET001::HuffmanNode>, CompareNode> nodeQueue;
-    for (auto pair: charMap) {
-        nodeQueue.push(MLLJET001::HuffmanNode(pair.first, pair.second));
-    }
-    return nodeQueue;
-}
-
-
-MLLJET001::HuffmanNode constructHuffmanTree(
-        priority_queue<MLLJET001::HuffmanNode,
-                vector<MLLJET001::HuffmanNode>, CompareNode> nodeQueue) {
-    // Construct the HuffmanTree using the Priority Queue
-    // Loop until just the root node is left in the priority queue.
-    while (nodeQueue.size() > 1) {
-        MLLJET001::HuffmanNode small1 = nodeQueue.top();
-        nodeQueue.pop();
-
-        MLLJET001::HuffmanNode small2 = nodeQueue.top();
-        nodeQueue.pop();
-
-        int totalFrequency = small1.getFrequency() + small2.getFrequency();
-
-        MLLJET001::HuffmanNode newParent('\0', totalFrequency);
-
-        newParent.left = make_shared<MLLJET001::HuffmanNode>(small1);
-        newParent.right = make_shared<MLLJET001::HuffmanNode>(small2);
-
-        nodeQueue.push(newParent);
-    };
-    return nodeQueue.top();
-}
-
-
-int main(int argc, const char* argv[]) {
-    if (argc < 2) {
+int main(int argc, const char *argv[]) {
+    if (argc < 3) {
         cout << "Too few arguments." << endl;
         cout << "Required: huffmanencode <input_file> <output_file>" << endl;
+        return 0;
     }
 
     string inputFileName = argv[1];
     string outputFileName = argv[2];
     vector<string> inputStrings;
 
-    unordered_map<char, int> charMap = generateCharMap(inputFileName,
-                                                       &inputStrings);
+    unordered_map<char, int> charMap = Utils::getCharMap(inputFileName, &inputStrings);
 
     // Construct the priority queue from the characters and their frequencies
-    MLLJET001::HuffmanNode rootNode =
-            constructHuffmanTree(makeNodeQueue(charMap));
+    MLLJET001::HuffmanNode rootNode = Utils::constructHuffmanTree(Utils::makeNodeQueue(charMap));
 
     cout << "Character Count: " << rootNode.getFrequency() << endl;
     cout << "\nCode Table:\n-----------" << endl;
